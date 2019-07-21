@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.atguigu.surveypark.model">
+    <class name="Page" table="pages">
+        <id name="id" column="id" type="java.lang.Integer">
+            <!-- generator class="native"></generator> ID则为主键           -->
+            <generator class="identity"/>
+        </id>
+        <property name="title" column="title" type="java.lang.String" length="100"/>
+        <property name="description" length="100" column="description" type="java.lang.String"/>
+
+        <!--        映射从Page到Survey的多对一的关系-->
+        <many-to-one name="survey" class="Survey" column="surveyid"/>
+
+
+<!--        从Page到Question的一对多的关系-->
+        <set name="questions" inverse="true">
+            <key column="pageid"/>
+            <one-to-many class="Question"/>
+        </set>
+
+    </class>
+
+
+</hibernate-mapping>

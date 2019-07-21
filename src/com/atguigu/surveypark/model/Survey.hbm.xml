@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.atguigu.surveypark.model">
+    <class name="Survey" table="surveys">
+        <id name="id" column="id" type="java.lang.Integer">
+            <!-- generator class="native"></generator> ID则为主键           -->
+            <generator class="identity"/>
+        </id>
+        <property name="title" type="java.lang.String" column="title"/>
+        <property name="preText" type="java.lang.String" column="pretext"/>
+        <property name="nextTex" type="java.lang.String" column="nexttext"/>
+        <property name="exitText" type="java.lang.String" column="exittext"/>
+        <property name="doneText" type="java.lang.String" column="donetext"/>
+        <property name="creatTime" type="java.util.Date" column="createtime"/>
+
+        <!--        映射从调查到用户的多对一的关系-->
+        <many-to-one name="user" class="User" column="userid"/>
+
+        <set name="pages" inverse="true">
+            <key column="surveyid"/>
+            <one-to-many class="Page"/>
+        </set>
+
+    </class>
+
+
+</hibernate-mapping>
